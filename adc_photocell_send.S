@@ -16,7 +16,7 @@ doit:
 	lds	r16, TCCR0A
 	ori	r16, (1<<COM0A1)|(1<<WGM01)|(1<<MUX0)
 	sts	TCCR0A, r16
-	lds	r16, TCCR0B, r16
+	lds	r16, TCCR0B
 	ori	r16, (1<<CS01)
 	sts	TCCR0B, r16
 
@@ -29,7 +29,7 @@ doit:
 	andi	r16, ~(1<<ADC0D)
 	sts	DIDR0, r16
 	lds	r16, ADCSRA
-	ori 	r16, (1<<ADEN)|(1<<ADATE)|(1<<ADPS2)|(1<<ADPS1)|(1<<ADPS0)|(1<<ADPS0)|(<<ADIE)
+	ori 	r16, (1<<ADEN)|(1<<ADATE)|(1<<ADPS2)|(1<<ADPS1)|(1<<ADPS0)|(1<<ADPS0)|(1<<ADIE)
 	andi	r16, ~(1<<ADTS2)|(1<<ADTS1)|(1<<ADTS0)
 	sts	ADCSRA, r16
 	lds	r16, ADCSRB
@@ -51,7 +51,7 @@ forever:
 
 	.global ADC_vect
 ADC_vect:
-	in	r2_ _SFR_IO_ADDR(SREG)
+	in	   r2, _SFR_IO_ADDR(SREG)
 	push	r2
 	lds	r2, ADCL
 	lds 	r2, ADCH
